@@ -1,0 +1,14 @@
+.loadNode {
+z-index:900;
+color:#416382; 
+font-weight:bold; 
+position: absolute;
+width: 313px; 
+height: 110px; 
+top:0;
+bottom:0; 
+right:0; 
+left:0;
+margin: auto;
+text-align:center;
+}

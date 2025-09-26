@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+       	<meta name="description" content="This service provides access to cadastral and topographic information, 
+       		satellite data and aerial photography for New South Wales. Developed by NSW Land & Property Information." />
+		<link rel="shortcut icon" href="js/sixmaps/app/images/waratah_40.png" />
+        <title>SIX Maps</title>
+        <link rel="stylesheet" href="css/sixmaps.css"/>
+	        
+        <script type="text/javascript">
+            var dojoConfig = {
+            	async:true,
+            	baseUrl:"js/dojo",
+            	parseOnLoad: false,
+                packages: [ 
+               		{"name": "sixmaps","location": "../sixmaps"},
+               		{"name": "channels","location": "../channels"}
+	   			]
+            };
+        </script>
+    
+        <script type="text/javascript" src="js/sixmaps/main.js"></script>        
+        <script type="text/javascript">
+			require([
+				"dojo/domReady!",
+				"dojo/io-query",
+				"sixmaps/app/App",
+				"sixmaps/properties"
+			],function(domReady, ioQuery, sixmapsApp, appProperties){
+				var queryParams = ioQuery.queryToObject(window.location.search.slice(1));  
+				var loadNode = document.getElementById('loadNode');
+				var params = {
+					config:queryParams.config || "sixmaps",
+					parameters : {
+						loadNode : loadNode,
+						channelsUrl : require.toUrl("channels").toString()
+					},
+					analyticsKey: appProperties.analyticsKey,
+					readQueryStringParams: true
+				};		
+				var app = new sixmapsApp(params).placeAt("sixmaps");
+				app.startup();
+			}); 	 
+        </script>
+    </head>
+    <body class="claro">
+		<div id="sixmapsContainer">
+			<div id="loadNode" class="loadNode">
+					<img src="images/SixMapsLogo.png">
+					<div><img src="images/loadingAnimation.gif"></div>
+			</div>
+			<div id="sixmaps"> 
+			</div> 
+		</div>
+    </body>
+</html>
